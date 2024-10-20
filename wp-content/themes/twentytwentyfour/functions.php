@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Twenty Twenty-Four functions and definitions
  *
@@ -12,20 +13,21 @@
  * Register block styles.
  */
 
-if ( ! function_exists( 'twentytwentyfour_block_styles' ) ) :
+if (! function_exists('twentytwentyfour_block_styles')) :
 	/**
 	 * Register custom block styles
 	 *
 	 * @since Twenty Twenty-Four 1.0
 	 * @return void
 	 */
-	function twentytwentyfour_block_styles() {
+	function twentytwentyfour_block_styles()
+	{
 
 		register_block_style(
 			'core/details',
 			array(
 				'name'         => 'arrow-icon-details',
-				'label'        => __( 'Arrow icon', 'twentytwentyfour' ),
+				'label'        => __('Arrow icon', 'twentytwentyfour'),
 				/*
 				 * Styles for the custom Arrow icon style of the Details block
 				 */
@@ -48,7 +50,7 @@ if ( ! function_exists( 'twentytwentyfour_block_styles' ) ) :
 			'core/post-terms',
 			array(
 				'name'         => 'pill',
-				'label'        => __( 'Pill', 'twentytwentyfour' ),
+				'label'        => __('Pill', 'twentytwentyfour'),
 				/*
 				 * Styles variation for post terms
 				 * https://github.com/WordPress/gutenberg/issues/24956
@@ -71,7 +73,7 @@ if ( ! function_exists( 'twentytwentyfour_block_styles' ) ) :
 			'core/list',
 			array(
 				'name'         => 'checkmark-list',
-				'label'        => __( 'Checkmark', 'twentytwentyfour' ),
+				'label'        => __('Checkmark', 'twentytwentyfour'),
 				/*
 				 * Styles for the custom checkmark list block style
 				 * https://github.com/WordPress/gutenberg/issues/51480
@@ -90,7 +92,7 @@ if ( ! function_exists( 'twentytwentyfour_block_styles' ) ) :
 			'core/navigation-link',
 			array(
 				'name'         => 'arrow-link',
-				'label'        => __( 'With arrow', 'twentytwentyfour' ),
+				'label'        => __('With arrow', 'twentytwentyfour'),
 				/*
 				 * Styles for the custom arrow nav link block style
 				 */
@@ -108,7 +110,7 @@ if ( ! function_exists( 'twentytwentyfour_block_styles' ) ) :
 			'core/heading',
 			array(
 				'name'         => 'asterisk',
-				'label'        => __( 'With asterisk', 'twentytwentyfour' ),
+				'label'        => __('With asterisk', 'twentytwentyfour'),
 				'inline_style' => "
 				.is-style-asterisk:before {
 					content: '';
@@ -144,20 +146,21 @@ if ( ! function_exists( 'twentytwentyfour_block_styles' ) ) :
 	}
 endif;
 
-add_action( 'init', 'twentytwentyfour_block_styles' );
+add_action('init', 'twentytwentyfour_block_styles');
 
 /**
  * Enqueue block stylesheets.
  */
 
-if ( ! function_exists( 'twentytwentyfour_block_stylesheets' ) ) :
+if (! function_exists('twentytwentyfour_block_stylesheets')) :
 	/**
 	 * Enqueue custom block stylesheets
 	 *
 	 * @since Twenty Twenty-Four 1.0
 	 * @return void
 	 */
-	function twentytwentyfour_block_stylesheets() {
+	function twentytwentyfour_block_stylesheets()
+	{
 		/**
 		 * The wp_enqueue_block_style() function allows us to enqueue a stylesheet
 		 * for a specific block. These will only get loaded when the block is rendered
@@ -170,37 +173,148 @@ if ( ! function_exists( 'twentytwentyfour_block_stylesheets' ) ) :
 			'core/button',
 			array(
 				'handle' => 'twentytwentyfour-button-style-outline',
-				'src'    => get_parent_theme_file_uri( 'assets/css/button-outline.css' ),
-				'ver'    => wp_get_theme( get_template() )->get( 'Version' ),
-				'path'   => get_parent_theme_file_path( 'assets/css/button-outline.css' ),
+				'src'    => get_parent_theme_file_uri('assets/css/button-outline.css'),
+				'ver'    => wp_get_theme(get_template())->get('Version'),
+				'path'   => get_parent_theme_file_path('assets/css/button-outline.css'),
 			)
 		);
 	}
 endif;
 
-add_action( 'init', 'twentytwentyfour_block_stylesheets' );
+add_action('init', 'twentytwentyfour_block_stylesheets');
 
 /**
  * Register pattern categories.
  */
 
-if ( ! function_exists( 'twentytwentyfour_pattern_categories' ) ) :
+if (! function_exists('twentytwentyfour_pattern_categories')) :
 	/**
 	 * Register pattern categories
 	 *
 	 * @since Twenty Twenty-Four 1.0
 	 * @return void
 	 */
-	function twentytwentyfour_pattern_categories() {
+	function twentytwentyfour_pattern_categories()
+	{
 
 		register_block_pattern_category(
 			'twentytwentyfour_page',
 			array(
-				'label'       => _x( 'Pages', 'Block pattern category', 'twentytwentyfour' ),
-				'description' => __( 'A collection of full page layouts.', 'twentytwentyfour' ),
+				'label'       => _x('Pages', 'Block pattern category', 'twentytwentyfour'),
+				'description' => __('A collection of full page layouts.', 'twentytwentyfour'),
 			)
 		);
 	}
 endif;
 
-add_action( 'init', 'twentytwentyfour_pattern_categories' );
+add_action('init', 'twentytwentyfour_pattern_categories');
+
+
+function create_projects_cpt()
+{
+	$labels = array(
+		'name' => __('Projects', 'Post Type General Name', 'textdomain'),
+		'singular_name' => __('Project', 'Post Type Singular Name', 'textdomain'),
+		'menu_name' => __('Projects', 'textdomain'),
+		'all_items' => __('All Projects', 'textdomain'),
+		'add_new_item' => __('Add New Project', 'textdomain'),
+		'add_item' => __('Add Project', 'textdomain'),
+		'edit_item' => __('Edit Project', 'textdomain'),
+		'new_item' => __('New Project', 'textdomain'),
+		'view_item' => __('View Project', 'textdomain'),
+		'search_items' => __('Search Projects', 'textdomain'),
+		'not_found' => __('No projects found', 'textdomain'),
+		'not_found_in_trash' => __('No projects found in Trash', 'textdomain'),
+	);
+
+	$args = array(
+		'label' => __('projects', 'textdomain'),
+		'description' => __('A custom post type for projects', 'textdomain'),
+		'labels' => $labels,
+		'supports' => array('title', 'editor', 'thumbnail'),
+		'hierarchical' => false,
+		'public' => true,
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'menu_position' => 5,
+		'show_in_admin_bar' => true,
+		'show_in_nav_menus' => true,
+		'can_export' => true,
+		'has_archive' => true,
+		'exclude_from_search' => false,
+		'publicly_queryable' => true,
+		'capability_type' => 'post',
+		'show_in_rest' => true, // Enable REST API support
+		'rest_base' => 'projects', // Custom REST API base (optional)
+		'rest_controller_class' => 'WP_REST_Posts_Controller', // Optional, defaults to standard controller
+		'menu_icon' => 'dashicons-portfolio',
+		'taxonomies' => array('post_tag'), // Use the existing tag taxonomy
+	);
+
+	register_post_type('projects', $args);
+
+	// Ensure 'post_tag' is registered for the 'projects' post type
+	register_taxonomy_for_object_type('post_tag', 'projects');
+}
+add_action('init', 'create_projects_cpt', 0);
+
+// Disable Gutenberg editor for the 'projects' custom post type
+function disable_gutenberg_for_projects()
+{
+	remove_post_type_support('projects', 'editor'); // Remove the editor
+}
+add_action('init', 'disable_gutenberg_for_projects');
+
+// Hide the default content area in the admin
+function hide_content_area_for_projects()
+{
+	global $pagenow;
+
+	if ('post.php' === $pagenow || 'post-new.php' === $pagenow) {
+		$post_type = isset($_GET['post_type']) ? $_GET['post_type'] : 'post';
+
+		if ('projects' === $post_type) {
+			echo '<style>
+                #postdivrich { display: none; } /* Hide the Gutenberg editor */
+                #editor { display: none; } /* Hide the block editor area */
+                #post-status-info { display: none; } /* Optional: Hide status info */
+            </style>';
+		}
+	}
+}
+add_action('admin_head', 'hide_content_area_for_projects');
+
+add_action('rest_api_init', function () {
+	register_rest_route('custom/v1', '/tags', array(
+		'methods' => 'GET',
+		'callback' => 'get_tags_by_ids',
+	));
+});
+
+function get_tags_by_ids(WP_REST_Request $request)
+{
+	$ids = $request->get_param('ids'); // Get the 'ids' parameter from the query
+	$ids_array = explode(',', $ids); // Convert comma-separated string to array
+
+	// Fetch tags by IDs
+	$tags = [];
+	foreach ($ids_array as $id) {
+		$tag = get_term($id, 'post_tag'); // Get the tag by ID
+		if (!is_wp_error($tag)) {
+			$tags[] = $tag; // Append to tags array if no error
+		}
+	}
+
+	return new WP_REST_Response($tags, 200);
+}
+
+function expose_media_rest_public()
+{
+	// Removing the authentication callback for media GET requests.
+	register_rest_field('attachment', 'public', array(
+		'get_callback' => function () {
+			return true;
+		},
+	));
+}
+add_action('rest_api_init', 'expose_media_rest_public');
